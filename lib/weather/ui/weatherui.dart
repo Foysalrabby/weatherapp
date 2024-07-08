@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weatherapp/weather/model/weatherjsonapi.dart';
 import 'package:weatherapp/weather/network/network.dart';
+import 'package:weatherapp/weather/ui/custommidview.dart';
 
 
 
@@ -14,7 +15,7 @@ class Weatherui extends StatefulWidget{
 }
 class Extentdedweatherui extends State<Weatherui>{
   late Future <weatherjsonparseapi> weatherdata;
-   String cityname="London";
+   String cityname="rajshahi";
 
    @override
   void initState() {
@@ -44,11 +45,14 @@ class Extentdedweatherui extends State<Weatherui>{
                 future: weatherdata,
                 builder: (BuildContext context,AsyncSnapshot<weatherjsonparseapi>snapshot){
                     if(snapshot.hasData){
-                      return Text(
-                         "${snapshot.data?.list?[0].weather?[0].description}"
+                      return Column(
+                        children:<Widget> [
+                          custommidview(snapshot),
+                        ],
                       );
                     }else{
-                      return Container(child: CircularProgressIndicator(),
+                      return Container(
+                        child: CircularProgressIndicator(),
                         ) ;
                     }
 
@@ -78,7 +82,10 @@ class Extentdedweatherui extends State<Weatherui>{
           contentPadding: EdgeInsets.all(6.0),
          ),
          onSubmitted: (value){
-
+           setState(() {
+             cityname=value;
+             weatherdata=new Network().getfetchalldata(cityName: cityname);
+           });
 
          },
        ),
