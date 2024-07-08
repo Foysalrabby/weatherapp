@@ -20,7 +20,8 @@ class Extentdedweatherui extends State<Weatherui>{
    @override
   void initState() {
     super.initState();
-    weatherdata=Network().getfetchalldata(cityName: cityname);
+    //weatherdata=Network().getfetchalldata(cityName: cityname);
+    weatherdata=getweathercityname(cityName:cityname);
     // weatherdata.then((weather) => {
     //   print(weather.list?[0].weather?[0].description)
     // });
@@ -84,7 +85,8 @@ class Extentdedweatherui extends State<Weatherui>{
          onSubmitted: (value){
            setState(() {
              cityname=value;
-             weatherdata=new Network().getfetchalldata(cityName: cityname);
+             //weatherdata=new Network().getfetchalldata(cityName: cityname);
+             weatherdata=getweathercityname(cityName:cityname);
            });
 
          },
@@ -92,6 +94,10 @@ class Extentdedweatherui extends State<Weatherui>{
      );
 
   }
+
+  Future<weatherjsonparseapi> getweathercityname({ required String cityName}) =>new Network().getfetchalldata(cityName: cityname);
+
+
 
 
 
