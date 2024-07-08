@@ -20,9 +20,9 @@ class Extentdedweatherui extends State<Weatherui>{
   void initState() {
     super.initState();
     weatherdata=Network().getfetchalldata(cityName: cityname);
-    weatherdata.then((weather) => {
-      print(weather.list?[0].weather?[0].description)
-    });
+    // weatherdata.then((weather) => {
+    //   print(weather.list?[0].weather?[0].description)
+    // });
 
   }
 
@@ -33,8 +33,57 @@ class Extentdedweatherui extends State<Weatherui>{
        title: Text("Welcome Weather App "),
        backgroundColor:Colors.blueGrey
      ),
-     body: Center(),
+     body:Container(
+       child: Padding(
+         padding: EdgeInsets.all(8.0),
+         child: ListView(
+           children: <Widget> [
+             textFieldview(),
+            Container(
+              child: FutureBuilder<weatherjsonparseapi>(
+                future: weatherdata,
+                builder: (BuildContext context,AsyncSnapshot<weatherjsonparseapi>snapshot){
+                    if(snapshot.hasData){
+                      return Text(
+                         "${snapshot.data?.list?[0].weather?[0].description}"
+                      );
+                    }else{
+                      return Container(child: CircularProgressIndicator(),
+                        ) ;
+                    }
+
+                },
+
+              ),
+            )
+           ],
+
+         ),
+       ),
+     ),
    );
+  }
+
+  Widget textFieldview () {
+     return Container (
+       child: TextField(
+         decoration: InputDecoration(
+           hintText: "Enter The City Name",
+           prefixIcon: Icon(Icons.search),
+           border:OutlineInputBorder(
+             borderRadius: BorderRadius.circular(10.0),
+
+
+           ),
+          contentPadding: EdgeInsets.all(6.0),
+         ),
+         onSubmitted: (value){
+
+
+         },
+       ),
+     );
+
   }
 
 
