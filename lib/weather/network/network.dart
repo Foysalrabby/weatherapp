@@ -12,6 +12,7 @@ Future<weatherjsonparseapi> getfetchalldata({required String cityName})async{
   final response=await http.get(Uri.parse(url));
    print("url:${Uri.parse(url)}");
    if(response.statusCode == 200){
+     print(json.decode(response.body));
    return weatherjsonparseapi.fromJson(json.decode(response.body));
    }else{
     throw Exception("failed to data load");

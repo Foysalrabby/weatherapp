@@ -72,7 +72,7 @@ class Lista {
     json['clouds'] != null ? new Clouds.fromJson(json['clouds']) : null;
     wind = json['wind'] != null ? new Wind.fromJson(json['wind']) : null;
     visibility = json['visibility'];
-    pop = json['pop'];
+    pop = json['pop'].toDouble();
     rain = json['rain'] != null ? new Rain.fromJson(json['rain']) : null;
     sys = json['sys'] != null ? new Sys.fromJson(json['sys']) : null;
     dtTxt = json['dt_txt'];
@@ -133,10 +133,10 @@ class Main {
     feelsLike = json['feels_like'].toDouble();
     tempMin = json['temp_min'].toDouble();
     tempMax = json['temp_max'].toDouble();
-    pressure = json['pressure'].toDouble();
-    seaLevel = json['sea_level'].toDouble();
-    grndLevel = json['grnd_level'].toDouble();
-    humidity = json['humidity'].toDouble();
+    pressure = json['pressure'];
+    seaLevel = json['sea_level'];
+    grndLevel = json['grnd_level'];
+    humidity = json['humidity'];
     tempKf = json['temp_kf'].toDouble();
   }
 
@@ -205,7 +205,7 @@ class Wind {
 
   Wind.fromJson(Map<String, dynamic> json) {
     speed = json['speed'].toDouble();
-    deg = json['deg'].toDouble();
+    deg = json['deg'];
     gust = json['gust'].toDouble();
   }
 
@@ -224,7 +224,7 @@ class Rain {
   Rain({this.d3h});
 
   Rain.fromJson(Map<String, dynamic> json) {
-    d3h = json['3h'];
+    d3h = json['3h'].toDouble();
   }
 
   Map<String, dynamic> toJson() {

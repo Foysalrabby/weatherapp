@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:weatherapp/weather/model/weatherjsonapi.dart';
+import 'package:weatherapp/weather/network/network.dart';
+
+
 
 class Weatherui extends StatefulWidget{
   @override
@@ -9,6 +13,19 @@ class Weatherui extends StatefulWidget{
 
 }
 class Extentdedweatherui extends State<Weatherui>{
+  late Future <weatherjsonparseapi> weatherdata;
+   String cityname="London";
+
+   @override
+  void initState() {
+    super.initState();
+    weatherdata=Network().getfetchalldata(cityName: cityname);
+    weatherdata.then((weather) => {
+      print(weather.city?.country)
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
    return Scaffold(
