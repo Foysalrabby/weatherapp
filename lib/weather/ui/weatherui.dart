@@ -21,7 +21,7 @@ class Extentdedweatherui extends State<Weatherui>{
     super.initState();
     weatherdata=Network().getfetchalldata(cityName: cityname);
     weatherdata.then((weather) => {
-      print(weather.city?.country)
+      print(weather.list?[0].weather?[0].description)
     });
 
   }
