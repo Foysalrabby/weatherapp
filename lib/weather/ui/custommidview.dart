@@ -1,12 +1,22 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:weatherapp/weather/Util/weatherforcatutil.dart';
 import 'package:weatherapp/weather/model/weatherjsonapi.dart';
 
 Widget custommidview(AsyncSnapshot<weatherjsonparseapi> snapshot){
   var forecastlist=snapshot.data?.list; //because list  is big and many list
   String ? cityname=snapshot.data?.city?.name;
   String ? countryname=snapshot.data?.city?.country;
+  int ? timestamp=snapshot.data?.list?[0].dt;
+  String dateformatter=Util.getDateformate(timestamp!);
+  double? kelvintemp=forecastlist?[0].main?.temp;
+  double? celtemp=kelvintemp!-273.3;
+  double? kelvintempfell=forecastlist?[0].main?.feelsLike;
+  double? celtempfll=kelvintempfell!-273.3;
+  double? tempmax=forecastlist?[0].main?.tempMax;
+  double celtempmax=tempmax!-273.3;
   // return Column(
   //   mainAxisAlignment: MainAxisAlignment.center,
   //   children: [
@@ -22,12 +32,90 @@ Widget custommidview(AsyncSnapshot<weatherjsonparseapi> snapshot){
              children: [
               Text("$cityname ,$countryname",style: TextStyle(
               color: Colors.black54,
-                fontSize: 20,
+                fontSize: 25,
                 fontWeight: FontWeight.bold
 
-              ),)
+              ),),
+               Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: Text("$dateformatter",style: TextStyle(
+                   color: Colors.black87,
+                   fontSize:15,
+
+                 ),),
+               ),
+               SizedBox(height: 10,),
+               // Icon(Icons.wb_sunny,color: Colors.red,size: 160,),
+               Icon(FontAwesomeIcons.sun,color: Colors.red,size: 160,),
+               Padding(
+                   padding: const EdgeInsets.symmetric(vertical: 12.0,horizontal: 12.0),
+                 child: Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                     Text("${celtemp.toStringAsFixed(2)} °C",style: TextStyle(
+                       color: Colors.black87,
+                       fontSize: 15,
+                       fontWeight: FontWeight.w500,
+
+                     ),),
+                     SizedBox(width: 10,),
+                     Flexible(
+                       child: Text("${forecastlist?[0].weather?[0].description}",style: TextStyle(
+                         color: Colors.black87,
+                         fontSize: 15,
+                         fontWeight: FontWeight.w500,
+                       ),
+                       overflow: TextOverflow.ellipsis,),
+
+                     )
+                   ],
+                 ),
+               ),
+               Padding(
+                 padding: const EdgeInsets.symmetric(vertical: 12.0,horizontal: 12.0),
+                 child: Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Column(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         Text("${celtempfll.toStringAsFixed(2)}°C"),
+                         Icon(FontAwesomeIcons.temperatureArrowUp)
+                       ],
+                     ),
+                   ),
+                     Padding(
+                         padding: EdgeInsets.all(8.0),
+                       child: Column(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: [
+                           Text("${forecastlist?[0].main?.humidity}"),
+                         Icon(FontAwesomeIcons.hotTub)
+                         ],
+                       ),
+                     ),
+
+                     Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Column(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: [
+                           Text("${celtempmax.toStringAsFixed(2)}°C"),
+                           Icon(FontAwesomeIcons.temperatureHigh)
+                         ],
+                       ),
+                     ),
+                   ],
+                 ),
+               )
              ],
+
         ),
+
+
+
       ),
 
   );
