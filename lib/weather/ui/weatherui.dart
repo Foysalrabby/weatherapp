@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weatherapp/weather/model/weatherjsonapi.dart';
 import 'package:weatherapp/weather/network/network.dart';
+import 'package:weatherapp/weather/ui/bottomcustomview.dart';
 import 'package:weatherapp/weather/ui/custommidview.dart';
 
 
@@ -49,6 +50,7 @@ class Extentdedweatherui extends State<Weatherui>{
                       return Column(
                         children:<Widget> [
                           custommidview(snapshot),
+                          bottomcustomview(snapshot);
                         ],
                       );
                     }else{

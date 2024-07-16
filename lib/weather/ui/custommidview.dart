@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weatherapp/weather/Util/weatherforcatutil.dart';
 import 'package:weatherapp/weather/model/weatherjsonapi.dart';
+import 'package:weatherapp/weather/ui/geticon.dart';
 
 Widget custommidview(AsyncSnapshot<weatherjsonparseapi> snapshot){
   var forecastlist=snapshot.data?.list; //because list  is big and many list
@@ -46,7 +47,8 @@ Widget custommidview(AsyncSnapshot<weatherjsonparseapi> snapshot){
                ),
                SizedBox(height: 10,),
                // Icon(Icons.wb_sunny,color: Colors.red,size: 160,),
-               Icon(FontAwesomeIcons.sun,color: Colors.red,size: 160,),
+
+               geticons(weathertype: "${forecastlist?[0].weather![0].main}", color: Colors.pinkAccent, fonstsizes: 160),
                Padding(
                    padding: const EdgeInsets.symmetric(vertical: 12.0,horizontal: 12.0),
                  child: Row(
@@ -82,7 +84,15 @@ Widget custommidview(AsyncSnapshot<weatherjsonparseapi> snapshot){
                        mainAxisAlignment: MainAxisAlignment.center,
                        children: [
                          Text("${celtempfll.toStringAsFixed(2)}°C"),
-                         Icon(FontAwesomeIcons.temperatureArrowUp)
+
+                         //Icon(FontAwesomeIcons.temperatureArrowUp,color: Colors.orangeAccent,),
+                         Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: Text("Feel like",style: TextStyle(
+                             color:  Colors.orangeAccent,
+                             fontSize: 18
+                           ),),
+                         ),
                        ],
                      ),
                    ),
@@ -91,8 +101,11 @@ Widget custommidview(AsyncSnapshot<weatherjsonparseapi> snapshot){
                        child: Column(
                          mainAxisAlignment: MainAxisAlignment.center,
                          children: [
-                           Text("${forecastlist?[0].main?.humidity}"),
-                         Icon(FontAwesomeIcons.hotTub)
+                           Text("${forecastlist?[0].main?.humidity} %"),
+                         Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: Icon(FontAwesomeIcons.hotTub,color: Colors.orangeAccent,),
+                         )
                          ],
                        ),
                      ),
@@ -103,7 +116,10 @@ Widget custommidview(AsyncSnapshot<weatherjsonparseapi> snapshot){
                          mainAxisAlignment: MainAxisAlignment.center,
                          children: [
                            Text("${celtempmax.toStringAsFixed(2)}°C"),
-                           Icon(FontAwesomeIcons.temperatureHigh)
+                           Padding(
+                             padding: const EdgeInsets.all(8.0),
+                             child: Icon(FontAwesomeIcons.temperatureHigh,color: Colors.orangeAccent,),
+                           )
                          ],
                        ),
                      ),
