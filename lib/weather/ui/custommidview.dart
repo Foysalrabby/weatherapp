@@ -17,7 +17,7 @@ Widget custommidview(AsyncSnapshot<weatherjsonparseapi> snapshot){
   double? kelvintempfell=forecastlist?[0].main?.feelsLike;
   double? celtempfll=kelvintempfell!-273.3;
   double? tempmax=forecastlist?[0].main?.tempMax;
-  double celtempmax=tempmax!-273.3;
+  double celtempmax=tempmax!-275.3;
   // return Column(
   //   mainAxisAlignment: MainAxisAlignment.center,
   //   children: [
@@ -48,7 +48,10 @@ Widget custommidview(AsyncSnapshot<weatherjsonparseapi> snapshot){
                SizedBox(height: 10,),
                // Icon(Icons.wb_sunny,color: Colors.red,size: 160,),
 
-               geticons(weathertype: "${forecastlist?[0].weather![0].main}", color: Colors.pinkAccent, fonstsizes: 160),
+               geticons(
+                 weathertype: "${forecastlist?[0].weather![0].main}", color: Colors.pinkAccent,
+                 fonstsizes: 160,),
+               // geticons(weathertype: "${forecastlist?[0].weather![0].main}", color: Colors.pinkAccent, fonstsizes: 160),
                Padding(
                    padding: const EdgeInsets.symmetric(vertical: 12.0,horizontal: 12.0),
                  child: Row(

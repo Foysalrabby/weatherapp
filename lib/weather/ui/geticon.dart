@@ -10,6 +10,8 @@ Widget geticons({required String weathertype, required Color color, required dou
       return Icon(FontAwesomeIcons.cloud, color: color, size: fonstsizes);
     case "Rain":
       return Icon(FontAwesomeIcons.cloudRain, color: color, size: fonstsizes);
+    case "Clouds":
+      return Icon(FontAwesomeIcons.cloud, color: color, size: fonstsizes);
     case "Snow":
       return Icon(FontAwesomeIcons.snowflake, color: color, size: fonstsizes);
     case "Thunderstorm":

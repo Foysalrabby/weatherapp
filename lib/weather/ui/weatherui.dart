@@ -50,7 +50,7 @@ class Extentdedweatherui extends State<Weatherui>{
                       return Column(
                         children:<Widget> [
                           custommidview(snapshot),
-                          bottomcustomview(snapshot);
+                          bottomcustomview(snapshot,context),
                         ],
                       );
                     }else{
